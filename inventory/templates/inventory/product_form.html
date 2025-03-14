@@ -1,0 +1,69 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">{% if object %}Edit{% else %}Add New{% endif %} Product</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            {{ form.name.errors }}
+                            <input type="text" name="{{ form.name.name }}" class="form-control" {% if form.name.value %}value="{{ form.name.value }}"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            {{ form.category.errors }}
+                            <select name="{{ form.category.name }}" class="form-control">
+                                {% for value, label in form.category.field.choices %}
+                                    <option value="{{ value }}" {% if form.category.value == value %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Brand</label>
+                            {{ form.brand.errors }}
+                            <input type="text" name="{{ form.brand.name }}" class="form-control" {% if form.brand.value %}value="{{ form.brand.value }}"{% endif %}>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Model Number</label>
+                            {{ form.model_number.errors }}
+                            <input type="text" name="{{ form.model_number.name }}" class="form-control" {% if form.model_number.value %}value="{{ form.model_number.value }}"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            {{ form.price.errors }}
+                            <input type="number" step="0.01" name="{{ form.price.name }}" class="form-control" {% if form.price.value %}value="{{ form.price.value }}"{% endif %}>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Stock</label>
+                            {{ form.stock.errors }}
+                            <input type="number" name="{{ form.stock.name }}" class="form-control" {% if form.stock.value %}value="{{ form.stock.value }}"{% endif %}>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    {{ form.description.errors }}
+                    <textarea name="{{ form.description.name }}" class="form-control" rows="4">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+                </div>
+                <div class="mt-3">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i>Save
+                    </button>
+                    <a href="{% url 'product-list' %}" class="btn btn-secondary">
+                        <i class="fas fa-times me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

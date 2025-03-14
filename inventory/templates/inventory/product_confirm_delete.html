@@ -1,0 +1,23 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">Delete Product</h3>
+        </div>
+        <div class="card-body">
+            <p class="lead">Are you sure you want to delete "{{ object.name }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash me-2"></i>Delete
+                </button>
+                <a href="{% url 'product-list' %}" class="btn btn-secondary">
+                    <i class="fas fa-times me-2"></i>Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
