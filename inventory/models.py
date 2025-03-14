@@ -6,6 +6,7 @@ class Product(models.Model):
         ('laptop', 'Laptop'),
         ('smartwatch', 'Smart Watch'),
         ('buds', 'Buds'),
+        ('earphone', 'Earphone'),
     ]
     
     name = models.CharField(max_length=200)
